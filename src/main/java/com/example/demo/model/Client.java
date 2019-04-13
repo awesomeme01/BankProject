@@ -10,6 +10,9 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullname;
+    @ElementCollection
+    @CollectionTable(name="credit_1", joinColumns=@JoinColumn(name="credit_id"))
+    @Column(name="credit")
     private List<Credit> credits;
 
     public Client(String fullname) {

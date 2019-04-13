@@ -3,9 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.model.Bank;
 import com.example.demo.model.Client;
 import com.example.demo.model.Credit;
+import com.example.demo.model.Payment;
 import com.example.demo.service.BankService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.ldap.PagedResultsControl;
 import java.util.List;
 
 @RestController
@@ -66,8 +68,8 @@ public class BankController {
         this.bankService.deleteClient(id);
     }
     @PutMapping("/credit/{id}")
-    public Credit makePayment(@PathVariable Long id){
-        this.bankService.makePayment(,id)
+    public Credit makePayment(@PathVariable Long id, @RequestBody Payment payment){
+        return this.bankService.makePayment(payment);
     }
 
 }

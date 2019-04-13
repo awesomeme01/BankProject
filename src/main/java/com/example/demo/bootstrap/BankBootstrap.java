@@ -3,22 +3,29 @@ package com.example.demo.bootstrap;
 import com.example.demo.model.Bank;
 import com.example.demo.model.Client;
 import com.example.demo.model.Credit;
+import com.example.demo.model.Payment;
 import com.example.demo.repository.BankRepository;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.CreditRepository;
+import com.example.demo.repository.PaymentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.sql.Time;
+import java.time.LocalDateTime;
 
 @Component
 public class BankBootstrap implements CommandLineRunner {
     private final BankRepository bankRepository;
     private final ClientRepository clientRepository;
     private final CreditRepository creditRepository;
+    private final PaymentRepository paymentRepository;
 
-    public BankBootstrap(BankRepository bankRepository, ClientRepository clientRepository, CreditRepository creditRepository) {
+    public BankBootstrap(BankRepository bankRepository, ClientRepository clientRepository, CreditRepository creditRepository,PaymentRepository paymentRepository) {
         this.bankRepository = bankRepository;
         this.clientRepository = clientRepository;
         this.creditRepository = creditRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     @Override
@@ -39,6 +46,7 @@ public class BankBootstrap implements CommandLineRunner {
         creditRepository.save(credit2);
         creditRepository.save(credit3);
         creditRepository.save(credit4);
-
+        Payment payment1 = new Payment("new payment",250.0, LocalDateTime.now(),"1267476Sha",credit1);
+        paymentRepository.save(payment1);
     }
 }

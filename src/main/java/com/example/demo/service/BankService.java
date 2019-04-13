@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Bank;
 import com.example.demo.model.Client;
 import com.example.demo.model.Credit;
+import com.example.demo.model.Payment;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface BankService {
     Client createClient(Client client);
     void deleteCredit(Long id);
     void deleteClient(Long id);
-    Credit makePayment(Double amount, Long id);
+    Credit makePayment(Payment payment);
 
 
 }

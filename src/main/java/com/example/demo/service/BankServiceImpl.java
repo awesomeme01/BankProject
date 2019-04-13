@@ -3,13 +3,15 @@ package com.example.demo.service;
 import com.example.demo.model.Bank;
 import com.example.demo.model.Client;
 import com.example.demo.model.Credit;
+import com.example.demo.model.Payment;
 import com.example.demo.repository.BankRepository;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.CreditRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Service
 public class BankServiceImpl implements BankService{
     private final BankRepository bankRepository;
     private final ClientRepository clientRepository;
@@ -89,19 +91,18 @@ public class BankServiceImpl implements BankService{
     }
 
     @Override
-    public Credit makePayment(Double amount, Long id) {
-        Credit credit  = creditRepository.findById(id).get();
-        Double oldAmount = credit.getAmount();
-        if(oldAmount>=amount) {
-            credit.setAmount(oldAmount - amount);
-            if(credit.getAmount() == 0){
-                credit.setPaid(true);
+    public Credit makePayment(Payment payment) {
+        Double oldAmount = payment.getAmount();
+        if(oldAmount>=payment.getAmount()) {
+            payment.getCredit().setAmount(oldAmount - payment.getAmount());
+            if(payment.getCredit().getAmount() == 0){
+                payment.getCredit().setPaid(true);
             }
         }
         else{
             System.out.println("You're trying to pay more than you have to!!!!");
             throw new IllegalArgumentException("Entered payment is greater than the actual amount of the credit needed to be paid!!!!");
         }
-        return creditRepository.save(credit);
+        return creditRepository.save(payment.getCredit());
     }
 }
