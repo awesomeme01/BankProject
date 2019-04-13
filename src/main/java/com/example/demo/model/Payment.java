@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
@@ -11,7 +12,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private Double amount;
+    private BigDecimal amount;
     private LocalDateTime time;
     private String password;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -21,7 +22,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(String description, Double amount, LocalDateTime time, String password, Credit credit) {
+    public Payment(String description, BigDecimal amount, LocalDateTime time, String password, Credit credit) {
         this.description = description;
         this.amount = amount;
         this.time = time;
@@ -61,11 +62,11 @@ public class Payment {
         this.description = description;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

@@ -8,6 +8,7 @@ import com.example.demo.model.Payment;
 import java.util.List;
 
 public interface BankService {
+    Bank createBank(Bank bank);
     Bank getBankById(Long id);
     List<Credit> getCredits();
     List<Credit> getPaidCredits();

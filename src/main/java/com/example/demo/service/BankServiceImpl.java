@@ -7,20 +7,26 @@ import com.example.demo.model.Payment;
 import com.example.demo.repository.BankRepository;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.CreditRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
 public class BankServiceImpl implements BankService{
-    private final BankRepository bankRepository;
-    private final ClientRepository clientRepository;
-    private final CreditRepository creditRepository;
 
-    public BankServiceImpl(BankRepository bankRepository, ClientRepository clientRepository, CreditRepository creditRepository) {
-        this.bankRepository = bankRepository;
-        this.clientRepository = clientRepository;
-        this.creditRepository = creditRepository;
+    @Autowired
+    private BankRepository bankRepository;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private CreditRepository creditRepository;
+
+
+    @Override
+    public Bank createBank(Bank bank) {
+        return this.bankRepository.save(bank);
     }
 
     @Override
@@ -92,10 +98,10 @@ public class BankServiceImpl implements BankService{
 
     @Override
     public Credit makePayment(Payment payment) {
-        Double oldAmount = payment.getAmount();
-        if(oldAmount>=payment.getAmount()) {
-            payment.getCredit().setAmount(oldAmount - payment.getAmount());
-            if(payment.getCredit().getAmount() == 0){
+        BigDecimal oldAmount = payment.getAmount();
+        if(oldAmount.compareTo(payment.getAmount())>0) {
+            payment.getCredit().setAmount(oldAmount.subtract(payment.getAmount()));
+            if(payment.getCredit().getAmount().compareTo(BigDecimal.ZERO)== 0){
                 payment.getCredit().setPaid(true);
             }
         }

@@ -3,6 +3,7 @@ package com.example.demo.model;
 import org.hibernate.type.descriptor.java.JdbcTimestampTypeDescriptor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public class Credit {
     private String title;
     private String currency;
     private Boolean isPaid;
-    private Double amount;
+    private BigDecimal amount;
     private Integer termMonths;
     private Double ratePercentage;
     private Timestamp timestamp;
@@ -27,7 +28,7 @@ public class Credit {
         
     }
 
-    public Credit(Client client, String title, String currency, Double amount, Integer termMonths, Double ratePercentage, Timestamp timestamp) {
+    public Credit(Client client, String title, String currency, BigDecimal amount, Integer termMonths, Double ratePercentage, Timestamp timestamp) {
         this.id = id;
         this.client = client;
         this.title = title;
@@ -88,11 +89,11 @@ public class Credit {
         this.title = title;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

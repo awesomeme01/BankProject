@@ -5,6 +5,8 @@ import com.example.demo.model.Client;
 import com.example.demo.model.Credit;
 import com.example.demo.model.Payment;
 import com.example.demo.service.BankService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.ldap.PagedResultsControl;
@@ -14,11 +16,10 @@ import java.util.List;
 @RequestMapping(BankController.URl_BANK)
 public class BankController {
     public static final String URl_BANK = "/api/bank";
-    private final BankService bankService;
+    @Autowired
+    private BankService bankService;
 
-    public BankController(BankService bankService) {
-        this.bankService = bankService;
-    }
+
     @GetMapping
     public Bank getBankById(){
         return this.bankService.getBankById(Integer.toUnsignedLong(1));
@@ -52,10 +53,12 @@ public class BankController {
         return this.bankService.getClientById(id);
     }
     @PostMapping("/credits")
+    @ResponseStatus(HttpStatus.CREATED)
     public Credit createCredit(@RequestBody Credit credit){
         return this.bankService.createCredit(credit);
     }
     @PostMapping("/clients")
+    @ResponseStatus(HttpStatus.CREATED)
     public Client createClient(@RequestBody Client client){
         return this.bankService.createClient(client);
     }
@@ -68,6 +71,7 @@ public class BankController {
         this.bankService.deleteClient(id);
     }
     @PutMapping("/credit/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public Credit makePayment(@PathVariable Long id, @RequestBody Payment payment){
         return this.bankService.makePayment(payment);
     }
