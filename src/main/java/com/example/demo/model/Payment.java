@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import com.example.demo.enums.PaymentStatus;
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Time;
@@ -14,7 +17,8 @@ public class Payment {
     private String description;
     private BigDecimal amount;
     private LocalDateTime time;
-    private String password;
+    private Integer confirmationCode;
+    private PaymentStatus paymentStatus;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "credit_id")
     private Credit credit;
@@ -22,11 +26,12 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(String description, BigDecimal amount, LocalDateTime time, String password, Credit credit) {
+
+    public Payment(String description, BigDecimal amount, LocalDateTime time, Integer confirmationCode, Credit credit) {
         this.description = description;
         this.amount = amount;
         this.time = time;
-        this.password = password;
+        this.confirmationCode = confirmationCode;
         this.credit = credit;
     }
 
@@ -38,12 +43,20 @@ public class Payment {
         this.credit = credit;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getConfirmationCode() {
+        return confirmationCode;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setConfirmationCode(Integer confirmationCode) {
+        this.confirmationCode = confirmationCode;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     public Long getId() {

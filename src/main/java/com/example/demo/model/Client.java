@@ -10,26 +10,38 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullname;
-    @ElementCollection
-    @CollectionTable(name="credit_1", joinColumns=@JoinColumn(name="credit_id"))
-    @Column(name="credit")
-    private List<Credit> credits;
+    private String phoneNumber;
+//    @ElementCollection
+//    @CollectionTable(name="credit_1", joinColumns=@JoinColumn(name="credit_id"))
+//    @Column(name="credit")
+//    private List<Credit> credits;
 
-    public Client(String fullname) {
-        this.id = id;
+    public Client() {
+    }
+
+    public Client(String fullname, String phoneNumber) {
         this.fullname = fullname;
-    }
-    public Credit addCreditToList(Credit credit){
-        credits.add(credit);
-        return credit;
-    }
-    public List<Credit> getCredits() {
-        return credits;
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setCredits(List<Credit> credits) {
-        this.credits = credits;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    //    public Credit addCreditToList(Credit credit){
+//        credits.add(credit);
+//        return credit;
+//    }
+//    public List<Credit> getCredits() {
+//        return credits;
+//    }
+//
+//    public void setCredits(List<Credit> credits) {
+//        this.credits = credits;
+//    }
 
     public Long getId() {
         return id;

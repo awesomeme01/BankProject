@@ -38,7 +38,6 @@ public class Credit {
         this.termMonths = termMonths;
         this.ratePercentage = ratePercentage;
         this.timestamp = timestamp;
-        client.addCreditToList(this);
     }
 
     public Boolean getPaid() {
