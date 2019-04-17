@@ -24,7 +24,7 @@ public class PaymentController {
 
     @PostMapping("/credit/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public prePayment beginPayment(@PathVariable Long id, @RequestBody Payment payment){
+    public Payment beginPayment(@PathVariable Long id, @RequestBody Payment payment){
         payment.setCredit(creditService.getCreditById(id));
         return this.paymentService.beginPayment(payment);
     }

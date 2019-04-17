@@ -23,19 +23,19 @@ public class PaymentServiceImpl implements PaymentService{
     private CreditRepository creditRepository;
     Random rand = new Random();
     @Override
-    public prePayment beginPayment(Payment payment) {
+    public Payment beginPayment(Payment payment) {
         if(validatePayment(payment)) {
             payment.setPaymentStatus(PaymentStatus.AWAITING_CONFIRMATION);
             payment.setTime(LocalDateTime.now());
             //test
             payment.setConfirmationCode(rand.nextInt((999999 - 100000) + 1) + 100000);
-            System.out.println("==========TESTING PAYMENT==========\nGenerating confimation code...\nCODE:  " + payment.getConfirmationCode());
+            System.out.println("==========TESTING PAYMENT==========\nGenerating confirmation code...\nCODE:  " + payment.getConfirmationCode());
         }
         else{
             payment.setPaymentStatus(PaymentStatus.ERROR);
         }
-        paymentRepository.save(payment);
-        return new prePayment(payment.getId(),payment.getDescription(),payment.getAmount(), payment.getTime(),payment.getPaymentStatus());
+        //Maybe I'll need to stop saving this payment here!
+        return  paymentRepository.save(payment);
     }
     @Override
     public Payment confirmPayment(Long paymentId, Integer confirmationCode){

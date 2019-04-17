@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 import com.example.demo.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.bytebuddy.implementation.bind.annotation.Default;
 
 import javax.persistence.*;
@@ -17,6 +19,7 @@ public class Payment {
     private String description;
     private BigDecimal amount;
     private LocalDateTime time;
+    @JsonIgnore
     private Integer confirmationCode;
     private PaymentStatus paymentStatus;
     @ManyToOne(fetch = FetchType.EAGER)
