@@ -4,10 +4,11 @@ import com.example.demo.model.Client;
 import com.example.demo.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(ClientController.url)
 public class ClientController {
@@ -20,11 +21,11 @@ public class ClientController {
     Client createClient(Client client);
     void deleteClient(Long id);
     */
-    @GetMapping
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public List<Client> getClients(){
         return clientService.getClients();
     }
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public Client getClientById(@PathVariable Long id){
         return clientService.getClientById(id);
     }

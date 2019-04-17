@@ -27,19 +27,10 @@ public class Payment {
     }
 
 
-    public Payment(String description, BigDecimal amount, LocalDateTime time, Integer confirmationCode, Credit credit) {
+    public Payment(String description, BigDecimal amount, LocalDateTime time, Credit credit) {
         this.description = description;
         this.amount = amount;
         this.time = time;
-        this.confirmationCode = confirmationCode;
-        this.credit = credit;
-    }
-
-    public Credit getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Credit credit) {
         this.credit = credit;
     }
 
@@ -47,8 +38,15 @@ public class Payment {
         return confirmationCode;
     }
 
-    public void setConfirmationCode(Integer confirmationCode) {
+    public void setConfirmationCode(Integer confirmationCode){
         this.confirmationCode = confirmationCode;
+    }
+    public Credit getCredit() {
+        return credit;
+    }
+
+    public void setCredit(Credit credit) {
+        this.credit = credit;
     }
 
     public PaymentStatus getPaymentStatus() {
