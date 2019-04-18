@@ -45,7 +45,7 @@ public class PaymentServiceImpl implements PaymentService{
         }
         return payment1;
     }
-    private static Boolean validatePayment(Payment payment){
+    public static Boolean validatePayment(Payment payment){
         BigDecimal oldAmount = payment.getCredit().getAmount();
         if(payment.getAmount().equals(BigDecimal.ZERO)){
             try{

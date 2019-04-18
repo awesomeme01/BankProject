@@ -5,6 +5,7 @@ import org.hibernate.type.descriptor.java.JdbcTimestampTypeDescriptor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -22,13 +23,21 @@ public class Credit {
     private BigDecimal amount;
     private Integer termMonths;
     private Double ratePercentage;
-    private Timestamp timestamp;
+    private LocalDateTime timestamp;
 
     public Credit(){
         
     }
 
-    public Credit(Client client, String title, String currency, BigDecimal amount, Integer termMonths, Double ratePercentage, Timestamp timestamp) {
+    public Credit(String title, String currency, Boolean isPaid, BigDecimal amount, LocalDateTime timestamp) {
+        this.title = title;
+        this.currency = currency;
+        this.isPaid = isPaid;
+        this.amount = amount;
+        this.timestamp = timestamp;
+    }
+
+    public Credit(Client client, String title, String currency, BigDecimal amount, Integer termMonths, Double ratePercentage, LocalDateTime timestamp) {
         this.id = id;
         this.client = client;
         this.title = title;
@@ -48,11 +57,11 @@ public class Credit {
         isPaid = paid;
     }
 
-    public Timestamp getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
