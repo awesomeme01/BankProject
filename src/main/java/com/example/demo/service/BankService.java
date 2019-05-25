@@ -10,7 +10,4 @@ import java.util.List;
 public interface BankService {
     Bank createBank(Bank bank);
     Bank getBankById(Long id);
-
-
-
 }
